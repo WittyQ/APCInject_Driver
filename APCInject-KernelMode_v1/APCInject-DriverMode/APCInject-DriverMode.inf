@@ -1,0 +1,33 @@
+[Version]
+Signature   = "$Windows NT$"
+Class       = System
+ClassGuid   = {4d36e97d-e325-11ce-bfc1-08002be10318}
+Provider    = %ProviderName%
+DriverVer   = 06/15/2024,1.0.0.0
+CatalogFile = APCInject-DriverMode.cat
+
+[DestinationDirs]
+DefaultDestDir = 12 ; System32\drivers directory
+
+[DefaultInstall.NTamd64]
+CopyFiles = APCInjectDriver.Files
+AddService = APCInjectDriver, 0x00000002, APCInjectDriver_ServiceInstall
+
+[APCInjectDriver_ServiceInstall]
+DisplayName    = "APC Injection Kernel Driver"
+ServiceType    = 1 ; SERVICE_KERNEL_DRIVER
+StartType      = 3 ; SERVICE_DEMAND_START
+ErrorControl   = 1 ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\APCInject-DriverMode.sys
+
+[APCInjectDriver.Files]
+APCInject-DriverMode.sys
+
+[SourceDisksNames]
+1 = "DebugMan_Wade(WQY) Disk",,,""
+
+[SourceDisksFiles]
+APCInject-DriverMode.sys = 1
+
+[Strings]
+ProviderName = "DebugMan_Wade(WQY)"
